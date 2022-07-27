@@ -2,8 +2,10 @@
 
 namespace App\Models\Api;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Child extends Model
 {
@@ -11,24 +13,6 @@ class Child extends Model
 
     public const MALE = 'Male';
     public const FEMALE = 'Female';
-
-    private string $name,
-    private string $gender,
-    private float $age
-    private int $parent_id;
-
-    public function __construct(
-        private string $name,
-        private string $gender,
-        private float $age,
-        private int $parent_id
-    ){
-        $this->name = $name;
-        $this->gender = $gender;
-        $this->age = $age;
-        $this->parent_id = $parent_id;
-    }
-
 
     // Getters & setters
 
@@ -64,20 +48,20 @@ class Child extends Model
         return floatval($this->age);
     }
 
-    public function setGender(float $age): self
+    public function setAge(float $age): self
     {
         $this->age = $age;
         return $this;
     }
 
-    public function getParent(): string
+    public function getParent(): ?User
     {
-        return $this->gender;
+        return $this->parent;
     }
 
-    public function setGender(string $gender): self
+    public function setParent(int $parent_id): self
     {
-        $this->gender = ucwords(trim($gender));
+        $this->parent_id = $parent_id;
         return $this;
     }
 

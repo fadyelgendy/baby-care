@@ -18,13 +18,14 @@ return new class extends Migration
             $table->string("name");
             $table->enum("gender", ['Male', 'Female']);
             $table->unsignedDouble('age');
-            $table->unsignedBigInteger("parent_id");
+            $table->unsignedInteger("parent_id");
             $table->timestamps();
+
+            $table->index("name");
 
             $table->foreign("parent_id")
                 ->references("id")
-                ->on("users")
-                ->onDelete("No Action");
+                ->on("users");
         });
     }
 
