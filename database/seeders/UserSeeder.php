@@ -15,20 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user1 = new User();
-        $user1->setName("User One")
-            ->setEmail("email1@test.com")
-            ->setPassword("12345678")
-            ->setPhoneNumber("01200625881")
-            ->setPartner(null)
-            ->save();
-
-        $user2 = new User();
-        $user2->setName("User two")
-            ->setEmail("email2@test.com")
-            ->setPassword("12345678")
-            ->setPhoneNumber("01200625882")
-            ->setPartner($user1->getId())
-            ->save();
+        \App\Models\User::factory()->create();
     }
 }

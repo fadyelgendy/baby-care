@@ -15,13 +15,6 @@ class ChildSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 5; $i++) {
-            $child = new Child();
-            $child->setName("child name " . $i)
-                ->setGender($i % 2 == 0 ? Child::FEMALE : Child::MALE)
-                ->setAge(floatval($i / $i + 1))
-                ->setParent(rand(1,2))
-                ->save();
-        }
+        \App\Models\Api\Child::factory(10)->create();
     }
 }

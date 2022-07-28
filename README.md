@@ -15,6 +15,7 @@
 Attached `tests\baby_care.json` [Postman](https://www.postman.com/) collection file, so you can check each endpoint params and response, and also test it yourself
 - import `baby_care.json` to **Postman**
 - run each request to check responses.
+**NOTE** User details are found in `database\factories\UserFactory.php` class
 
 ## Endpoints Documentation
 Provided `Endpoints.md` file that contains all endpoints documentation and each specification

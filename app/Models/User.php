@@ -87,9 +87,14 @@ class User extends Authenticatable
         return $this;
     }
 
+    public function getPartnerId(): ?int
+    {
+        return $this->partner_id;
+    }
+
     public function getPartner(): ?User
     {
-        return $this->partner()->first();
+        return User::where("id", $this->getPartnerId())->first();
     }
 
     public function setPartner(?int $partner_id): self
