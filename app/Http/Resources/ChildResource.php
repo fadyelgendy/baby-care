@@ -18,7 +18,11 @@ class ChildResource extends JsonResource
             "id" => $this->getId(),
             "name" => $this->getName(),
             "age" => $this->getAge(),
-            "gender" => $this->getGender()
+            "gender" => $this->getGender(),
+            "parent" => [
+                "id" => $this->getParent()->getId(),
+                "name" => $this->getParent()->getName(),
+            ]
         ];
     }
 }

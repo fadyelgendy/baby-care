@@ -18,17 +18,18 @@ final class ChildService extends BaseService
      */
     public function list(): array
     {
-        $children = [];
+        $partnerId = 0;
+        if (auth()->user()->getPartner())
+            $partnerId = auth()->user()->getPartner()->getId();
 
-        $children[] = auth()->user()->getChildren()->map(function ($child) {
+        $children = Child::whereIn("parent_id", [
+            auth()->id(),
+            $partnerId
+        ])->get();
+
+        $children = $children->map(function ($child) {
             return new ChildResource($child);
         });
-
-        if (auth()->user()->getPartner()) {
-            $children[] = auth()->user()->getPartner()->getChildren()->map(function ($child) {
-                return new ChildResource($child);
-            });
-        }
 
         return $this->successResponse(data: [
             "children" => $children

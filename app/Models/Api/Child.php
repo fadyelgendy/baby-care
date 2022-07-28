@@ -60,9 +60,9 @@ class Child extends Model
         return $this;
     }
 
-    public function getParent(): ?User
+    public function getParent(): User
     {
-        return $this->parent;
+        return $this->parent()->first();
     }
 
     public function setParent(int $parent_id): self

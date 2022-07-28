@@ -19,6 +19,11 @@ final class ParentService extends BaseService
      */
     public function createPartner(Collection $request): array
     {
+        if (auth()->user()->getPartner())
+            return $this->failedResponse(422, [
+                "error" => trans('api_responses.messages.failed.parent.exists')
+            ]);
+
         $validator = Validator::make($request->toArray(), [
             "name" => ["required", "string", "min:6", "max:254"],
             "email" => ["required", "email", "unique:users,email"],
@@ -37,6 +42,9 @@ final class ParentService extends BaseService
                 ->setPhoneNumber((string)$request->get("phone_number"))
                 ->setPartner(auth()->user()->id)
                 ->save();
+
+            auth()->user()->setPartner($user->getId());
+            auth()->user()->save();
 
             return $this->successResponse(data: ['message' => trans('api_responses.messages.success.parent.create')]);
         } catch (Exception $e) {

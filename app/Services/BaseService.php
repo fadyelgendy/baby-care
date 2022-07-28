@@ -54,8 +54,9 @@ abstract class BaseService
             "status_code" => $statusCode,
             "exception" => [
                 "message" => trans("api_responses.messages.failed.general.server_error"),
+                "error" => $exception->getMessage(),
                 "file" => $exception->getFile(),
-                "line" => $exception->getLine()
+                "line" => $exception->getLine(),
             ]
         ];
     }

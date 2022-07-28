@@ -28,6 +28,10 @@ return [
                 "not_found" => "This child is not exist or it does not belongs to You!"
             ],
 
+            "parent" => [
+                "exists" => "This User Has Partner already, You can not added another partner"
+            ],
+
             "general" => [
                 "server_error" => "Something went wrong! Please Try again later."
             ]

@@ -20,7 +20,7 @@ class ChildSeeder extends Seeder
             $child->setName("child name " . $i)
                 ->setGender($i % 2 == 0 ? Child::FEMALE : Child::MALE)
                 ->setAge(floatval($i / $i + 1))
-                ->setParent(1)
+                ->setParent(rand(1,2))
                 ->save();
         }
     }
