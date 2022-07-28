@@ -12,7 +12,12 @@
 - run `php artisan serve` to start local server
 
 ## Postman collection
+Attached `tests\baby_care.json` [Postman](https://www.postman.com/) collection file, so you can check each endpoint params and response, and also test it yourself
+- import `baby_care.json` to **Postman**
+- run each request to check responses.
 
+## Endpoints Documentation
+Provided `Endpoints.md` file that contains all endpoints documentation and each specification
 
 ## Testing
-To run all tests, run `composer test`, this will run all tests [**feature tests**, **unit tests**].
+To run all tests, run `php artisan test`, this will run all tests [**feature tests**, **unit tests**].
