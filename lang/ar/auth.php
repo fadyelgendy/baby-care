@@ -12,7 +12,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    
-    'unauthorized' => 'Action not Authorized'
 
+    'unauthorized' => 'غير مصرح به'
 ];
