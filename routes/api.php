@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ChildController;
+use App\Http\Controllers\Api\ParentController;
 use App\Services\BaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +25,20 @@ Route::post("/register", [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix("user")->group(function() {
         Route::post("/logout", [AuthController::class, 'logout']);
+
+        Route::prefix("partner")->group(function() {
+            Route::get("/show", [ParentController::class, "getPartner"]);
+            Route::post("/create", [ParentController::class, "createPartner"]);
+        });
+
+        Route::prefix("children")->group(function() {
+            Route::get("/list", [ChildController::class, "list"]);
+            Route::post("/create", [ChildController::class, "create"]);
+            Route::get("/{id}/show", [ChildController::class, "show"]);
+            Route::post("/{id}/edit", [ChildController::class, "edit"]);
+            Route::post("/{id}/delete", [ChildController::class, "delete"]);
+        });
+        
     });
 });
 

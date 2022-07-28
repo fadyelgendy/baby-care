@@ -17,7 +17,7 @@ final class ParentService extends BaseService
      * @param Collection $request
      * @return array
      */
-    public function create(Collection $request): array
+    public function createPartner(Collection $request): array
     {
         $validator = Validator::make($request->toArray(), [
             "name" => ["required", "string", "min:6", "max:254"],
@@ -51,10 +51,8 @@ final class ParentService extends BaseService
      */
     public function getPartner(): array
     {
-        $user = auth()->user();
-
         return $this->successResponse(data: [
-            "partner" => new UserResource($user->getPartner())
+            "partner" => new UserResource(auth()->user()->getPartner())
         ]);
     }
 }

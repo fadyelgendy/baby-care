@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Api\Child;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -88,13 +89,18 @@ class User extends Authenticatable
 
     public function getPartner(): ?User
     {
-        return $this->partner;
+        return $this->partner()->first();
     }
 
     public function setPartner(?int $partner_id): self
     {
         $this->partner_id = $partner_id;
         return $this;
+    }
+
+    public function getChildren(): Collection
+    {
+        return $this->children()->get();
     }
 
     // Relations
@@ -105,6 +111,6 @@ class User extends Authenticatable
 
     public function children(): HasMany
     {
-        return $this->hasMany(Child::class);
+        return $this->hasMany(Child::class, 'parent_id');
     }
 }

@@ -28,7 +28,9 @@ class Child extends Model
 
     public function setName(string $name): self
     {
-        $this->name = trim($name);
+        if (is_string($name))
+            $this->name = trim($name);
+
         return $this;
     }
 
@@ -39,7 +41,9 @@ class Child extends Model
 
     public function setGender(string $gender): self
     {
-        $this->gender = ucwords(trim($gender));
+        if (is_string($gender))
+            $this->gender = ucwords(trim($gender));
+
         return $this;
     }
 
@@ -50,7 +54,9 @@ class Child extends Model
 
     public function setAge(float $age): self
     {
-        $this->age = $age;
+        if (is_numeric($age))
+            $this->age = $age;
+            
         return $this;
     }
 
