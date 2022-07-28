@@ -23,7 +23,7 @@ final class AuthService extends BaseService
         $validator = Validator::make($request->toArray(), [
             "name" => ["required", "string", "min:6", "max:254"],
             "email" => ["required", "email", "unique:users,email"],
-            "phone_number" => ["required", "numeric", "unique:users,phone_number"],
+            "phone_number" => ["required", "unique:users,phone_number"],
             "password" => ["required", "min:6", "max:254", "confirmed"]
         ]);
 
@@ -39,7 +39,7 @@ final class AuthService extends BaseService
                 ->setPartner(null)
                 ->save();
 
-            return $this->successResponse(data: [
+            return $this->successResponse(statusCode: 201, data: [
                 'message' => trans('api_responses.messages.success.user.create'),
                 "user" => new UserResource(User::where('email', $request->get('email'))->first())
             ]);

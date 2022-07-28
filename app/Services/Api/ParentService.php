@@ -27,7 +27,7 @@ final class ParentService extends BaseService
         $validator = Validator::make($request->toArray(), [
             "name" => ["required", "string", "min:6", "max:254"],
             "email" => ["required", "email", "unique:users,email"],
-            "phone_number" => ["required", "numeric", "unique:users,phone_number"],
+            "phone_number" => ["required", "unique:users,phone_number"],
             "password" => ["required", "min:6", "max:254", "confirmed"]
         ]);
 
@@ -46,7 +46,7 @@ final class ParentService extends BaseService
             auth()->user()->setPartner($user->getId());
             auth()->user()->save();
 
-            return $this->successResponse(data: ['message' => trans('api_responses.messages.success.parent.create')]);
+            return $this->successResponse(statusCode: 201, data: ['message' => trans('api_responses.messages.success.parent.create')]);
         } catch (Exception $e) {
             return $this->failedWithExceptionResponse(exception: $e);
         }
@@ -59,8 +59,9 @@ final class ParentService extends BaseService
      */
     public function getPartner(): array
     {
+        $partner = auth()->user()->getPartner();
         return $this->successResponse(data: [
-            "partner" => new UserResource(auth()->user()->getPartner())
+            "partner" => ($partner) ? new UserResource($partner) : null
         ]);
     }
 }

@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\User::factory()->create()->raw(['email' => 'test@email.com', 'password' => "12345678"]);
         \App\Models\User::factory()->create();
     }
 }

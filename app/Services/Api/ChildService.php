@@ -86,7 +86,7 @@ final class ChildService extends BaseService
                 ->setParent(auth()->id())
                 ->save();
 
-            return $this->successResponse(data: [
+            return $this->successResponse(statusCode: 201, data: [
                 "message" => trans("api_responses.messages.success.child.create")
             ]);
         } catch (Exception $ex) {
