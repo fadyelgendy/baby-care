@@ -69,7 +69,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_get_null_when_getting_his_partner()
+    public function test_user_get_null_without_partner()
     {
         Sanctum::actingAs(
             \App\Models\User::factory()->create(),
@@ -217,7 +217,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_delete_child_he_did_not_created()
+    public function test_user_can_not_delete_child_not_created()
     {
         $user = \App\Models\User::factory()->create();
         $child = \App\Models\Api\Child::factory()->create();
