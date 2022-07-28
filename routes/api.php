@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Services\BaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Public Endpoints
+Route::post("/login", [AuthController::class, 'login']);
+Route::post("/register", [AuthController::class, 'register']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix("user")->group(function() {
+        Route::post("/logout", [AuthController::class, 'logout']);
+    });
 });
+
+// Handle unauthorized requests
+Route::get('/unauthorized', function () {
+    return [
+        "success" => false,
+        "status_code" => 401,
+        "errors" => [
+            "error" => trans("auth.unauthorized")
+        ]
+    ];
+})->name("api.unauthorized");

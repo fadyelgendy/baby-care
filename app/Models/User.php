@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this;
     }
 
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
     public function setPassword(string $password): self
     {
         $this->password = Hash::make($password);
